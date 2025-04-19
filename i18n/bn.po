@@ -1,0 +1,23 @@
+# Translation of Harnest Label Industries in Bengali
+
+msgid "" msgstr "" "Project-Id-Version: Odoo Server 18.0\\n" "Language: bn\\n" "MIME-Version: 1.0\\n" "Content-Type: text/plain; charset=UTF-8\\n"
+
+msgid "Fabric Quality" msgstr "কাপড়ের গুণমান"
+
+### msgid "Quantity" msgstr "পরিমাণ"
+
+msgid "Delivery Lead Time (Days)" msgstr "ডেলিভারি লিড টাইম (দিন)"
+
+msgid "Inquiry Source" msgstr "অনুসন্ধানের উৎস"
+
+msgid "Sample Status" msgstr "নমুনার অবস্থা"
+
+msgid "Verify Sample" msgstr "নমুনা যাচাই করুন"
+
+msgid "Pass Quality Control" msgstr "গুণমান নিয়ন্ত্রণ পাস"
+
+msgid "Next Stage" msgstr "পরবর্তী পর্যায়"
+
+msgid "Reject Sample" msgstr "নমুনা প্রত্যাখ্যান"
+
+msgid "Harnest Leads" msgstr "হার্নেস্ট লিডস"
