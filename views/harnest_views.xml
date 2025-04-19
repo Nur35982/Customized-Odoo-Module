@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extend CRM Lead Form View -->
+    <record id="harnest_crm_lead_form" model="ir.ui.view">
+        <field name="name">harnest.crm.lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_verify_sample" string="Verify Sample" type="object" class="btn-primary" invisible="original_sample_verified == True"/>
+                    <button name="action_quality_control_pass" string="Pass Quality Control" type="object" class="btn-primary" invisible="quality_control_passed == True"/>
+                    <button name="action_advance_sample_status" string="Next Stage" type="object" class="btn-primary"/>
+                    <button name="action_reject_sample" string="Reject Sample" type="object" class="btn-secondary" invisible="sample_status != 'customer_approval'"/>
+                    <field name="sample_status" widget="statusbar" statusbar_visible="inquiry,sample_development,sample_delivered,customer_approval,customer_rejection,re_sampling,sample_approved,order_finalized"/>
+                </header>
+            </xpath>
+            <xpath expr="//group[1]" position="inside">
+                <group>
+                    <field name="fabric_quality"/>
+                    <field name="quantity"/>
+                    <field name="delivery_lead_time"/>
+                    <field name="inquiry_source"/>
+                    <field name="original_sample_verified"/>
+                    <field name="quality_control_passed"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend CRM Lead Kanban View -->
+    <record id="harnest_crm_lead_kanban" model="ir.ui.view">
+        <field name="name">harnest.crm.lead.kanban</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="inside">
+                <field name="sample_status"/>
+                <field name="fabric_quality"/>
+                <field name="quantity"/>
+            </xpath>
+            <xpath expr="//t[@t-name='kanban-box']" position="inside">
+                <div class="o_kanban_record_bottom">
+                    <strong>Sample Status:</strong> <field name="sample_status"/>
+                    <br/>
+                    <strong>Fabric Quality:</strong> <field name="fabric_quality"/>
+                    <br/>
+                    <strong>Quantity:</strong> <field name="quantity"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action to Filter Harnest Leads -->
+    <record id="action_harnest_leads" model="ir.actions.act_window">
+        <field name="name">Harnest Leads</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('type', '=', 'lead')]</field>
+        <field name="help" type="html">
+            <p>Manage inquiries and sample development for Harnest Label Industries.</p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_harnest_root" name="Harnest Label" sequence="10"/>
+    <menuitem id="menu_harnest_leads" name="Leads"
+              parent="menu_harnest_root"
+              action="action_harnest_leads"
+              sequence="20"/>
+</odoo>
